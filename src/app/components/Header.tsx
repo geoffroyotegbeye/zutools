@@ -70,7 +70,7 @@ export function Header() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-                <img src="images/zutools.png" alt="logo" className='w-44'/>
+                <img src="/images/zutools.png" alt="logo" className='w-44'/>
             </Link>
 
             {/* Navigation desktop */}

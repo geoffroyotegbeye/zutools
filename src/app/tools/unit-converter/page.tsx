@@ -277,6 +277,80 @@ export default function UnitConverter() {
                   </div>
                 </div>
 
+                <div className="bg-blue-50/80 dark:bg-blue-900/30 backdrop-blur-lg rounded-lg p-6 mt-8">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                    À propos de l&apos;outil
+                  </h2>
+                  <div className="space-y-4">
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Notre convertisseur d&apos;unités est un outil complet qui permet de convertir facilement entre différentes unités de mesure. Il prend en charge :
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><strong>Longueur</strong> : conversions entre mètres, kilomètres, centimètres, millimètres, pouces, pieds, yards et miles</span>
+                      </li>
+                      <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><strong>Poids</strong> : conversions entre kilogrammes, grammes, milligrammes, livres et onces</span>
+                      </li>
+                      <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><strong>Température</strong> : conversions entre Celsius, Fahrenheit et Kelvin</span>
+                      </li>
+                      <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><strong>Volume</strong> : conversions entre litres, millilitres, gallons, quarts, pintes, tasses et onces liquides</span>
+                      </li>
+                      <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><strong>Surface</strong> : conversions entre mètres carrés, kilomètres carrés, centimètres carrés, millimètres carrés, hectares, acres, pieds carrés et pouces carrés</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4 space-y-2">
+                      <p className="text-gray-600 dark:text-gray-300">
+                        <strong>Caractéristiques principales :</strong>
+                      </p>
+                      <ul className="space-y-2">
+                        <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Conversion instantanée et précise</span>
+                        </li>
+                        <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Interface intuitive avec sélection rapide des unités</span>
+                        </li>
+                        <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Copie rapide des résultats avec unités</span>
+                        </li>
+                        <li className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                          <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Support du mode sombre</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
                 {error && (
                   <div className="p-4 bg-red-50/80 dark:bg-red-900/30 backdrop-blur-lg rounded-md">
                     <p className="text-sm text-red-600 dark:text-red-400">{error}</p>

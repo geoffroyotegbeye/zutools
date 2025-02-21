@@ -133,6 +133,77 @@ export default function YoutubeThumbnail() {
                   </div>
                 </div>
               )}
+
+              {/* Section À propos */}
+              <div className="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  À propos de l&apos;Extracteur de Miniatures YouTube
+                </h2>
+                
+                <div className="prose dark:prose-invert max-w-none">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    L&apos;Extracteur de Miniatures YouTube ZuTools est un outil pratique qui vous permet de télécharger facilement les images de prévisualisation (thumbnails) de n&apos;importe quelle vidéo YouTube en différentes qualités.
+                  </p>
+                  
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        Formats Disponibles
+                      </h3>
+                      <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                        <li>Maximale (1920x1080)</li>
+                        <li>Standard HD (1280x720)</li>
+                        <li>Haute qualité (480x360)</li>
+                        <li>Qualité moyenne (320x180)</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        Fonctionnalités
+                      </h3>
+                      <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                        <li>Extraction instantanée</li>
+                        <li>Prévisualisation des images</li>
+                        <li>Téléchargement direct</li>
+                        <li>Support de tous les formats d&apos;URL YouTube</li>
+                        <li>Interface intuitive</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Comment utiliser
+                    </h3>
+                    <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>Copiez l&apos;URL de la vidéo YouTube souhaitée</li>
+                      <li>Collez l&apos;URL dans le champ de saisie</li>
+                      <li>Cliquez sur "Extraire les miniatures"</li>
+                      <li>Choisissez la qualité d&apos;image souhaitée</li>
+                      <li>Cliquez sur "Télécharger" pour sauvegarder l&apos;image</li>
+                    </ol>
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Formats d&apos;URL Supportés
+                    </h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>Standard : youtube.com/watch?v=VIDEO_ID</li>
+                      <li>Court : youtu.be/VIDEO_ID</li>
+                      <li>Intégré : youtube.com/embed/VIDEO_ID</li>
+                      <li>Playlist : youtube.com/watch?v=VIDEO_ID&list=PLAYLIST_ID</li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 bg-blue-50/80 dark:bg-blue-900/30 backdrop-blur-lg rounded-lg p-4">
+                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                      <strong>Note :</strong> Certaines miniatures en haute qualité peuvent ne pas être disponibles pour toutes les vidéos. Dans ce cas, l&apos;outil vous proposera automatiquement la meilleure qualité disponible.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

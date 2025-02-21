@@ -197,6 +197,84 @@ export default function TextCorrection() {
                   </div>
                 )}
               </div>
+
+              {/* Section À propos */}
+              <div className="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  À propos du Correcteur de Texte Multilingue
+                </h2>
+                
+                <div className="prose dark:prose-invert max-w-none">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Le Correcteur de Texte Multilingue ZuTools est un outil avancé de correction orthographique et grammaticale qui prend en charge plusieurs langues. Il vous aide à améliorer la qualité de vos textes en détectant et en corrigeant les erreurs.
+                  </p>
+                  
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        Langues Supportées
+                      </h3>
+                      <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                        <li>Français</li>
+                        <li>English (Anglais)</li>
+                        <li>Español (Espagnol)</li>
+                        <li>Deutsch (Allemand)</li>
+                        <li>Italiano (Italien)</li>
+                        <li>Nederlands (Néerlandais)</li>
+                        <li>Português (Portugais)</li>
+                        <li>Русский (Russe)</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        Types de Corrections
+                      </h3>
+                      <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                        <li>Orthographe</li>
+                        <li>Grammaire</li>
+                        <li>Ponctuation</li>
+                        <li>Style et clarté</li>
+                        <li>Accord des mots</li>
+                        <li>Conjugaison des verbes</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Comment utiliser
+                    </h3>
+                    <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>Sélectionnez la langue de votre texte dans le menu déroulant</li>
+                      <li>Collez ou tapez votre texte dans la zone de texte</li>
+                      <li>Cliquez sur "Vérifier le texte" pour lancer l'analyse</li>
+                      <li>Examinez les suggestions de correction proposées</li>
+                      <li>Cliquez sur les suggestions pour appliquer les corrections</li>
+                      <li>Utilisez le bouton "Copier le texte" pour copier le texte corrigé</li>
+                    </ol>
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      Fonctionnalités Avancées
+                    </h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                      <li>Correction en temps réel pendant la saisie</li>
+                      <li>Suggestions contextuelles intelligentes</li>
+                      <li>Explication détaillée des erreurs</li>
+                      <li>Interface interactive pour les corrections</li>
+                      <li>Support du copier-coller rapide</li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 bg-blue-50/80 dark:bg-blue-900/30 backdrop-blur-lg rounded-lg p-4">
+                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                      <strong>Note :</strong> Cet outil utilise l'API LanguageTool pour fournir des corrections précises et pertinentes. Les suggestions sont basées sur des règles linguistiques avancées et sont constamment mises à jour pour améliorer la qualité des corrections.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
