@@ -141,7 +141,7 @@ export default function UnitConverter() {
         const converted = conversion(numValue)
         setResult(converted.toFixed(2))
       } else {
-        const conversion = conversions[unitType][fromUnit as keyof typeof conversions.length][toUnit as keyof typeof conversions.length]
+        const conversion = conversions[unitType][fromUnit as keyof typeof conversions[typeof unitType]][toUnit as keyof typeof conversions[typeof unitType]];
         const converted = numValue * conversion
         setResult(converted.toFixed(6).replace(/\.?0+$/, ''))
       }
