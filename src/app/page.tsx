@@ -1,73 +1,93 @@
 import Link from 'next/link'
+import { FaFont, FaYoutube, FaExchangeAlt, FaClock, FaFileAlt } from 'react-icons/fa'
+
+const tools = [
+  {
+    name: 'Correction de texte',
+    description: 'Corrigez vos textes en temps réel avec notre outil de correction intelligent',
+    icon: FaFont,
+    path: '/tools/text-correction',
+    color: 'blue'
+  },
+  {
+    name: 'Extracteur de miniatures YouTube',
+    description: 'Téléchargez facilement les miniatures de vos vidéos YouTube préférées',
+    icon: FaYoutube,
+    path: '/tools/youtube-thumbnail',
+    color: 'red'
+  },
+  {
+    name: 'Convertisseur d\'unités',
+    description: 'Convertissez facilement différentes unités de mesure',
+    icon: FaExchangeAlt,
+    path: '/tools/unit-converter',
+    color: 'green'
+  },
+  {
+    name: 'Outils de temps',
+    description: 'Chronomètre, minuteur et alarmes pour gérer votre temps',
+    icon: FaClock,
+    path: '/tools/timer',
+    color: 'purple'
+  },
+  {
+    name: 'Convertisseur de fichiers',
+    description: 'Convertissez vos fichiers dans différents formats (images, audio, vidéo, PDF)',
+    icon: FaFileAlt,
+    path: '/tools/file-converter',
+    color: 'orange'
+  }
+]
 
 export default function Home() {
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-blue-900 dark:via-gray-900 dark:to-purple-900 min-h-screen">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-              <div className="text-center">
-                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-                  <span className="block">Des outils en ligne</span>
-                  <span className="block text-blue-600 dark:text-blue-400">pour vous simplifier la vie</span>
-                </h1>
-                <p className="mt-3 text-base text-gray-500 dark:text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                  Découvrez notre collection d'outils gratuits pour améliorer votre productivité quotidienne.
-                  Du correcteur de texte à l'extracteur de miniatures YouTube, nous avons ce qu'il vous faut.
-                </p>
-              </div>
-            </main>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Outils en ligne gratuits
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Une collection d&apos;outils pratiques pour améliorer votre productivité quotidienne
+          </p>
         </div>
-      </div>
 
-      {/* Tools Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
-          Nos Outils
-        </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <Link
-            href="/tools/text-correction"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-          >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Correcteur de texte</h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Corrigez l&apos;orthographe et la grammaire de vos textes en temps réel.
-            </p>
-          </Link>
+        {/* Tools Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {tools.map((tool) => {
+            const IconComponent = tool.icon
+            return (
+              <Link
+                key={tool.path}
+                href={tool.path}
+                className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="p-6">
+                  <div className={`inline-flex p-3 rounded-lg bg-${tool.color}-100 dark:bg-${tool.color}-900/20 text-${tool.color}-600 dark:text-${tool.color}-400 mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    {tool.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {tool.description}
+                  </p>
+                </div>
+                <div className={`absolute bottom-0 left-0 h-1 w-full bg-${tool.color}-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
+              </Link>
+            )
+          })}
+        </div>
 
-          <Link
-            href="/tools/youtube-thumbnail"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-          >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Miniatures YouTube</h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Téléchargez les miniatures de vos vidéos YouTube préférées en haute qualité.
-            </p>
-          </Link>
-
-          <Link
-            href="/tools/unit-converter"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-          >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Convertisseur d&apos;unités</h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Convertissez facilement entre différentes unités : longueur, poids, température, volume et surface.
-            </p>
-          </Link>
-
-          <Link
-            href="/tools/timer"
-            className="block p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-          >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Gestion du temps</h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Chronomètre, compte à rebours et alarmes en ligne. Parfait pour le sport, la cuisine ou le travail.
-            </p>
-          </Link>
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            Tous nos outils sont gratuits et faciles à utiliser.
+          </p>
+          <p className="text-gray-600 dark:text-gray-300">
+            Choisissez un outil ci-dessus pour commencer !
+          </p>
         </div>
       </div>
     </div>
