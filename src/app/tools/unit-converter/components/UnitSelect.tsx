@@ -9,14 +9,14 @@ interface UnitSelectProps {
 
 export default function UnitSelect({ units, value, onChange, label }: UnitSelectProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
         {label}
       </label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
+        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-700/50 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:text-white"
       >
         {units.map((unit) => (
           <option key={unit.value} value={unit.value}>

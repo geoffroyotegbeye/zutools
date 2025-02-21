@@ -107,6 +107,8 @@ export default function UnitConverter() {
   const [toUnit, setToUnit] = useState(units[unitType][0].value)
   const [value, setValue] = useState('')
   const [result, setResult] = useState('')
+  const [copySuccess, setCopySuccess] = useState(false)
+  const [error, setError] = useState('')
 
   const handleUnitTypeChange = (type: UnitType) => {
     setUnitType(type)
@@ -114,10 +116,13 @@ export default function UnitConverter() {
     setToUnit(units[type][0].value)
     setValue('')
     setResult('')
+    setError('')
   }
 
   const convert = (value: string) => {
     setValue(value)
+    setError('')
+    
     if (!value) {
       setResult('')
       return
@@ -125,124 +130,174 @@ export default function UnitConverter() {
 
     const numValue = parseFloat(value)
     if (isNaN(numValue)) {
-      setResult('Valeur invalide')
+      setError('Veuillez entrer un nombre valide')
+      setResult('')
       return
     }
 
-    if (unitType === 'temperature') {
-      const conversion = conversions.temperature[fromUnit as keyof typeof conversions.temperature][toUnit as keyof typeof conversions.temperature]
-      const converted = conversion(numValue)
-      setResult(converted.toFixed(2))
-    } else {
-      const conversion = conversions[unitType][fromUnit as keyof typeof conversions.length][toUnit as keyof typeof conversions.length]
-      const converted = numValue * conversion
-      setResult(converted.toFixed(6))
+    try {
+      if (unitType === 'temperature') {
+        const conversion = conversions.temperature[fromUnit as keyof typeof conversions.temperature][toUnit as keyof typeof conversions.temperature]
+        const converted = conversion(numValue)
+        setResult(converted.toFixed(2))
+      } else {
+        const conversion = conversions[unitType][fromUnit as keyof typeof conversions.length][toUnit as keyof typeof conversions.length]
+        const converted = numValue * conversion
+        setResult(converted.toFixed(6).replace(/\.?0+$/, ''))
+      }
+    } catch (err) {
+      setError('Une erreur est survenue lors de la conversion')
+      setResult('')
+    }
+  }
+
+  const handleCopy = () => {
+    if (result) {
+      const unitLabel = units[unitType].find(u => u.value === toUnit)?.label.split(' ')[0]
+      const textToCopy = `${result} ${unitLabel}`
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        setCopySuccess(true)
+        setTimeout(() => setCopySuccess(false), 2000)
+      })
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Espace publicitaire gauche */}
-          <div className="hidden lg:block lg:w-64 space-y-4">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 h-[600px]">
-              <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-blue-900 dark:via-gray-900 dark:to-purple-900 py-8">
+      {/* Container principal avec espaces publicitaires */}
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex gap-6">
+        {/* Espace publicitaire gauche */}
+        <div className="hidden lg:block w-48 flex-shrink-0">
+          <div className="sticky top-8">
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg p-4 rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20 h-[400px]">
+              <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500 text-sm">
                 Espace publicitaire
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Contenu principal */}
-          <div className="flex-1 max-w-4xl mx-auto">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                Convertisseur d&apos;unités
-              </h1>
+        {/* Contenu principal */}
+        <div className="flex-1">
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20 p-8">
+            <div className="space-y-8">
+              <div className="text-center">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  Convertisseur d&apos;unités
+                </h1>
+                <p className="mt-2 text-gray-600 dark:text-gray-400">
+                  Convertissez facilement entre différentes unités de mesure
+                </p>
+              </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-4">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Type d&apos;unité
-                    </label>
-                    <select
-                      value={unitType}
-                      onChange={(e) => handleUnitTypeChange(e.target.value as UnitType)}
-                      className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
-                    >
-                      {unitTypes.map((type) => (
-                        <option key={type.value} value={type.value}>
-                          {type.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Type d&apos;unité
+                  </label>
+                  <select
+                    value={unitType}
+                    onChange={(e) => handleUnitTypeChange(e.target.value as UnitType)}
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-700/50 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:text-white"
+                  >
+                    {unitTypes.map((type) => (
+                      <option key={type.value} value={type.value}>
+                        {type.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Valeur à convertir
-                    </label>
-                    <input
-                      type="number"
-                      value={value}
-                      onChange={(e) => convert(e.target.value)}
-                      placeholder="Entrez une valeur"
-                      className="w-full p-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Valeur à convertir
+                      </label>
+                      <input
+                        type="number"
+                        value={value}
+                        onChange={(e) => convert(e.target.value)}
+                        placeholder="Entrez une valeur"
+                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-700/50 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:text-white"
+                      />
+                    </div>
+
+                    <UnitSelect
+                      units={units[unitType]}
+                      value={fromUnit}
+                      onChange={(value) => {
+                        setFromUnit(value)
+                        if (value && value.trim()) convert(value)
+                      }}
+                      label="De"
                     />
                   </div>
 
-                  <UnitSelect
-                    units={units[unitType]}
-                    value={fromUnit}
-                    onChange={setFromUnit}
-                    label="De"
-                  />
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Résultat
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={result ? `${result} ${units[unitType].find(u => u.value === toUnit)?.label.split(' ')[0]}` : ''}
+                          readOnly
+                          className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-700/50 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:text-white"
+                        />
+                        {result && (
+                          <button
+                            onClick={handleCopy}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                          >
+                            {copySuccess ? (
+                              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                            ) : (
+                              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                              </svg>
+                            )}
+                          </button>
+                        )}
+                      </div>
+                    </div>
 
-                  <UnitSelect
-                    units={units[unitType]}
-                    value={toUnit}
-                    onChange={setToUnit}
-                    label="Vers"
-                  />
-                </div>
-
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                    Résultat
-                  </h2>
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                    {result ? `${result} ${units[unitType].find(u => u.value === toUnit)?.label.split(' ')[0]}` : '-'}
+                    <UnitSelect
+                      units={units[unitType]}
+                      value={toUnit}
+                      onChange={(value) => {
+                        setToUnit(value)
+                        if (value && value.trim()) convert(value)
+                      }}
+                      label="Vers"
+                    />
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Espace publicitaire mobile */}
-            <div className="lg:hidden mb-8">
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 h-32">
-                <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
-                  Espace publicitaire
-                </div>
-              </div>
-            </div>
+                {error && (
+                  <div className="p-4 bg-red-50/80 dark:bg-red-900/30 backdrop-blur-lg rounded-md">
+                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                  </div>
+                )}
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                À propos du convertisseur
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300">
-                Notre convertisseur d&apos;unités vous permet de convertir facilement entre différentes unités de mesure.
-                Vous pouvez convertir des longueurs, des poids, des températures, des volumes et des surfaces.
-                Les conversions sont précises et instantanées.
-              </p>
+                {result && !error && (
+                  <div className="p-4 bg-green-50/80 dark:bg-green-900/30 backdrop-blur-lg rounded-md">
+                    <p className="text-sm text-green-600 dark:text-green-400">Conversion effectuée avec succès !</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Espace publicitaire droit */}
-          <div className="hidden lg:block lg:w-64 space-y-4">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 h-[600px]">
-              <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
+        {/* Espace publicitaire droite */}
+        <div className="hidden xl:block w-48 flex-shrink-0">
+          <div className="sticky top-8">
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg p-4 rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20 h-[400px]">
+              <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500 text-sm">
                 Espace publicitaire
               </div>
             </div>

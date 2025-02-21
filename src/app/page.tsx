@@ -28,14 +28,14 @@ const tools = [
     description: 'Chronomètre, minuteur et alarmes pour gérer votre temps',
     icon: FaClock,
     path: '/tools/timer',
-    color: 'purple'
+    color: 'blue'
   },
   {
     name: 'Convertisseur de fichiers',
     description: 'Convertissez vos fichiers dans différents formats (images, audio, vidéo, PDF)',
     icon: FaFileAlt,
     path: '/tools/file-converter',
-    color: 'orange'
+    color: 'red'
   }
 ]
 

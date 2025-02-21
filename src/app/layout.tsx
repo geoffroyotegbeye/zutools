@@ -5,7 +5,6 @@ import './globals.css'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { ThemeProvider } from './providers/ThemeProvider'
-import Navigation from './components/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,7 +37,6 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
             <Header />
-            <Navigation />
             <main className="flex-grow bg-gray-50 dark:bg-gray-800 pt-[1rem] text-sm sm:text-base text-gray-900 dark:text-gray-100">
               {children}
             </main>
