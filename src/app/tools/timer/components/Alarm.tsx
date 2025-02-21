@@ -11,7 +11,12 @@ interface Alarm {
   repeat: boolean
 }
 
-const AlarmPopup = ({ isRinging, stopAlarm }) => {
+interface AlarmPopupProps {
+  isRinging: boolean; 
+  stopAlarm: () => void; 
+}
+
+const AlarmPopup: React.FC<AlarmPopupProps> = ({ isRinging, stopAlarm }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
