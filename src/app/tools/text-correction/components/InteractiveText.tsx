@@ -15,6 +15,13 @@ interface Props {
   onTextUpdate: (newText: string) => void
 }
 
+// Ajout d'une interface pour les segments
+interface TextSegment {
+  text: string
+  isCorrection: boolean
+  correction?: Correction
+}
+
 export default function InteractiveText({ text, corrections, onTextUpdate }: Props) {
   const [hoveredCorrection, setHoveredCorrection] = useState<Correction | null>(null)
   const [isTooltipHovered, setIsTooltipHovered] = useState(false)
@@ -36,11 +43,13 @@ export default function InteractiveText({ text, corrections, onTextUpdate }: Pro
     setHoveredCorrection(null)
   }
 
-  const handleMouseEnter = (correction: Correction) => {
+  const handleMouseEnter = (correction: Correction | undefined) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
     }
-    setHoveredCorrection(correction)
+    if (correction) {
+      setHoveredCorrection(correction)
+    }
   }
 
   const handleMouseLeave = () => {
@@ -65,7 +74,7 @@ export default function InteractiveText({ text, corrections, onTextUpdate }: Pro
     }, 500) // 500ms delay before hiding
   }
 
-  const segments = []
+  const segments: TextSegment[] = []
   let lastIndex = 0
 
   // Trier les corrections par position de début
@@ -128,7 +137,7 @@ export default function InteractiveText({ text, corrections, onTextUpdate }: Pro
                           {segment.correction.replacements.slice(0, 3).map((replacement, i) => (
                             <li
                               key={i}
-                              onClick={() => handleReplacementClick(segment.correction, replacement.value)}
+                              onClick={() => handleReplacementClick(segment.correction!, replacement.value)}
                               className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 cursor-pointer px-2 py-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/50"
                             >
                               {replacement.value}
