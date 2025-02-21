@@ -124,7 +124,11 @@ export default function FileConverter() {
       );
       return URL.createObjectURL(convertedBlob);
     } catch (error) {
-      throw new Error(`Conversion failed: ${error.message}`);
+      if (error instanceof Error) {
+        throw new Error(`Conversion failed: ${error.message}`);
+      } else {
+        throw new Error('Conversion failed: Unknown error');
+      }
     }
   }
 
