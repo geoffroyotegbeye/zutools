@@ -37,7 +37,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
             <Header />
-            <main className="flex-grow bg-gray-50 dark:bg-gray-800 pt-[1rem] text-sm sm:text-base text-gray-900 dark:text-gray-100">
+            <main className="flex-grow bg-gray-50 dark:bg-gray-800 text-sm sm:text-base text-gray-900 dark:text-gray-100">
               {children}
             </main>
             <div className="sticky bottom-0 bg-white dark:bg-gray-900 p-4 sm:hidden">
